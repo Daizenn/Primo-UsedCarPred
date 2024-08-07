@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="/" class="logo">Primo.</a>
+            <nav>
+                <a href="/">Home</a>
+                <a href="/car_list">List Data Mobil</a>
+                <a href="/history">History Hasil Prediksi</a>
+                <a href="/#predict" class="btn-dark">Prediksi Harga</a>
+            </nav>
+        </header>
+        
+        <h1>Car List</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Brand</th>
+                    <th>Jenis Mobil</th>
+                    <th>Tahun Kendaraan</th>
+                    <th>Warna</th>
+                    <th>Transmisi</th>
+                    <th>Kilometer</th>
+                    <th>Mesin (CC)</th>
+                    <th>Bahan Bakar</th>
+                    <th>Dirakit</th>
+                    <th>Penumpang</th>
+                    <th>Pintu</th>
+                    <th>Harga</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for car in cars %}
+                <tr>
+                    <td>{{ car.brand }}</td>
+                    <td>{{ car.jenis_mobil }}</td>
+                    <td>{{ car.tahun_kendaraan }}</td>
+                    <td>{{ car.warna }}</td>
+                    <td>{{ car.transmisi }}</td>
+                    <td>{{ car.kilometer }}</td>
+                    <td>{{ car.mesin_enginecc }}</td>
+                    <td>{{ car.bahan_bakar }}</td>
+                    <td>{{ car.dirakit }}</td>
+                    <td>{{ car.penumpang }}</td>
+                    <td>{{ car.pintu }}</td>
+                    <td>{{ car.harga }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

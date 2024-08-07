@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-..." crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}" defer></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="/" class="logo">Primo.</a>
+            <nav>
+                <a href="/">Home</a>
+                <a href="/car_list">List Data Mobil</a>
+                <a href="/history">History Hasil Prediksi</a>
+                <a href="/#predict" class="btn-dark">Prediksi Harga</a>
+            </nav>
+        </header>
+
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Prediksi Harga Mobil Bekas</h1>
+                <p>Platform terpercaya untuk menemukan nilai pasar mobil bekas.</p>
+                <a href="#predict" class="btn-orange">Mulai Prediksi Harga</a>
+            </div>
+            <div class="hero-image">
+                <img src="/static/images/atomic_teal_car.jpg" alt="Mobil bekas" width="500" height="300">
+            </div>
+        </div>
+
+        <div class="section" id="predict">
+            <h2>Prediksi Harga Mobil Bekas</h2>
+            <p>Masukkan detail mobil Anda untuk mendapatkan prediksi harga secara cepat.</p>
+            <form class="prediction-form" id="predictor-form" action="/predict" method="post">
+                <div class="form-row">
+                    <div class="form-column">
+                        <div class="form-group">
+                            <label for="brand">Merek:</label>
+                            <select class="form-control" name="brand">
+                                <option hidden>Merek</option>
+                                <option value="1">Aston Martin</option>
+                                <option value="2">Audi</option>
+                                <option value="3">Bentley</option>
+                                <option value="4">BMW</option>
+                                <option value="5">Cadillac</option>
+                                <option value="6">Chery</option>
+                                <option value="7">Chevrolet</option>
+                                <option value="8">Daihatsu</option>
+                                <option value="9">DFSK</option>
+                                <option value="10">Ford</option>
+                                <option value="11">Geely</option>
+                                <option value="12">Maserati</option>
+                                <option value="13">Mercedes-Benz</option>
+                                <option value="14">Mazda</option>
+                                <option value="15">Rolls-Royce</option>
+                                <option value="16">Renault</option>
+                                <option value="17">Land Rover</option>
+                                <option value="18">Lexus</option>
+                                <option value="19">Hummer</option>
+                                <option value="20">Hyundai</option>
+                                <option value="21">KIA</option>
+                                <option value="22">Honda</option>
+                                <option value="23">Nissan</option>
+                                <option value="24">Peugeot</option>
+                                <option value="25">Porsche</option>
+                                <option value="26">Proton</option>
+                                <option value="27">Jeep</option>
+                                <option value="28">MG</option>
+                                <option value="29">Wuling</option>
+                                <option value="30">Isuzu</option>
+                                <option value="31">Tesla</option>
+                                <option value="32">Toyota</option>
+                                <option value="33">Subaru</option>
+                                <option value="34">smart</option>
+                                <option value="35">Volkswagen</option>
+                                <option value="36">Suzuki</option>
+                                <option value="37">Mitsubishi</option>
+                                <option value="38">MINI</option>                                
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="jenis_mobil">Jenis Mobil:</label>
+                            <select class="form-control" name="jenis_mobil">
+                                <option hidden>Jenis</option>
+                                <option value="1">Box</option>
+                                <option value="2">Cabriolet</option>
+                                <option value="3">Convertible</option>
+                                <option value="4">Coupe</option>
+                                <option value="5">Double Cabin</option>
+                                <option value="6">Fastback</option>
+                                <option value="7">Hatchback</option>
+                                <option value="8">Jeep</option>
+                                <option value="9">Minibus</option>
+                                <option value="10">MPV</option>
+                                <option value="11">Pick-up</option>
+                                <option value="12">Sedan</option>
+                                <option value="13">SUV</option>
+                                <option value="14">Targa</option>
+                                <option value="15">Van</option>
+                                <option value="16">Wagon</option>                                
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="tahun_kendaraan">Tahun:</label>
+                            <select class="form-control" name="tahun_kendaraan">
+                                <option hidden>Tahun</option>
+                                <option value="1997">1997</option>
+                                <option value="1998">1998</option>
+                                <option value="1999">1999</option>
+                                <option value="2000">2000</option>
+                                <option value="2001">2001</option>
+                                <option value="2002">2002</option>
+                                <option value="2003">2003</option>
+                                <option value="2004">2004</option>
+                                <option value="2005">2005</option>
+                                <option value="2006">2006</option>
+                                <option value="2007">2007</option>
+                                <option value="2008">2008</option>
+                                <option value="2009">2009</option>
+                                <option value="2010">2010</option>
+                                <option value="2011">2011</option>
+                                <option value="2012">2012</option>
+                                <option value="2013">2013</option>
+                                <option value="2014">2014</option>
+                                <option value="2015">2015</option>
+                                <option value="2016">2016</option>
+                                <option value="2017">2017</option>
+                                <option value="2018">2018</option>
+                                <option value="2019">2019</option>
+                                <option value="2020">2020</option>
+                                <option value="2021">2021</option>
+                                <option value="2022">2022</option>
+                                <option value="2023">2023</option>
+                                <option value="2024">2024</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="warna">Warna:</label>
+                            <select class="form-control" name="warna">
+                                <option hidden>Warna</option>
+                                <option value="1">Abu-abu</option>
+                                <option value="2">Biru</option>
+                                <option value="3">Coklat</option>
+                                <option value="4">Emas</option>
+                                <option value="5">Hijau</option>
+                                <option value="6">Hitam</option>
+                                <option value="7">Kuning</option>
+                                <option value="8">Marun</option>
+                                <option value="9">Merah</option>
+                                <option value="10">Orange</option>
+                                <option value="11">Putih</option>
+                                <option value="12">Silver</option>
+                                <option value="13">Ungu</option>                                
+                            </select>
+                        </div>
+                    </div>
+        
+                    <!-- Column 2 -->
+                    <div class="col-md-4 col-sm-12">
+                        <div class="form-group">
+                            <label for="transmisi">Transmisi:</label>
+                            <select class="form-control" name="transmisi">
+                                <option hidden>Transmisi</option>
+                                <option value="1">Automatic</option>
+                                <option value="2">Manual</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="kilometer">Kilometer:</label>
+                            <input type="range" min="50" max="400000" step="50" class="slider" id="rangeSlider" name="kilometer" oninput="updateKilometerValue(this.value)">
+                            <span id="kilometerValue">20000</span> km
+                        </div>
+                        <div class="form-group">
+                            <label for="mesin_enginecc">Mesin (cc):</label>
+                            <input type="range" min="0" max="7000" step="500" class="slider" id="rangeSlider2" name="mesin_enginecc" oninput="updateMesinValue(this.value)">
+                            <span id="mesinValue">3500</span> cc
+                        </div>
+                        <div class="form-group">
+                            <label for="bahan_bakar">Bahan Bakar:</label>
+                            <select class="form-control" name="bahan_bakar">
+                                <option hidden>BBM</option>
+                                <option value="0">Electric</option>
+                                <option value="1">Pertamax</option>
+                                <option value="2">Solar</option>
+                            </select>
+                        </div>
+                    </div>
+        
+                    <!-- Column 3 -->
+                    <div class="col-md-4 col-sm-12">
+                        <div class="form-group">
+                            <label for="dirakit">Dirakit:</label>
+                            <select class="form-control" name="dirakit">
+                                <option hidden>Dirakit</option>
+                                <option value="1">Complete Knock Down (CKD)</option>
+                                <option value="2">Complete Built Up (CBU)</option>
+                                <option value="3">Semi Knock Down (SKD)</option>
+                                <option value="4">4 Speaker Stereo</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="penumpang">Penumpang:</label>
+                            <select class="form-control" name="penumpang">
+                                <option hidden>Penumpang</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="pintu">Pintu:</label>
+                            <select class="form-control" name="pintu">
+                                <option hidden>Pintu</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn-orange">Prediksi Harga</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div id="result"></div>
+        </div>
+
+        <div class="section advantages">
+            <h2>Keunggulan Menggunakan Website Primo</h2>
+            <div class="grid">
+                <div class="card advantage-card">
+                    <h3>Prediksi Akurat</h3>
+                    <p>Sistem kami menggunakan algoritma canggih untuk memberikan prediksi harga mobil bekas yang sangat akurat.</p>
+                </div>
+                <div class="card advantage-card">
+                    <h3>Data Terkini</h3>
+                    <p>Kami selalu memperbarui database kami dengan data terbaru agar Anda mendapatkan informasi yang paling relevan.</p>
+                </div>
+                <div class="card advantage-card">
+                    <h3>Mudah Digunakan</h3>
+                    <p>Antarmuka yang sederhana dan intuitif memudahkan Anda dalam mencari dan memprediksi harga mobil bekas.</p>
+                </div>
+            </div>
+        </div>
+    
+        <div class="section-chart" id="bar">
+            <h2>Bar Chart Harga Mobil Bekas</h2>
+            
+            <div class="filters">
+                <label for="yearFilter">Pilih Tahun:</label>
+                <select id="yearFilter">
+                    <option value="">Semua Tahun</option>
+                    <option value="1997">1997</option>
+                    <option value="1998">1998</option>
+                    <option value="1999">1999</option>
+                    <option value="2000">2000</option>
+                    <option value="2001">2001</option>
+                    <option value="2002">2002</option>
+                    <option value="2003">2003</option>
+                    <option value="2004">2004</option>
+                    <option value="2005">2005</option>
+                    <option value="2006">2006</option>
+                    <option value="2007">2007</option>
+                    <option value="2008">2008</option>
+                    <option value="2009">2009</option>
+                    <option value="2010">2010</option>
+                    <option value="2011">2011</option>
+                    <option value="2012">2012</option>
+                    <option value="2013">2013</option>
+                    <option value="2014">2014</option>
+                    <option value="2015">2015</option>
+                    <option value="2016">2016</option>
+                    <option value="2017">2017</option>
+                    <option value="2018">2018</option>
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                </select>
+        
+                <label for="typeFilter">Pilih Jenis Mobil:</label>
+                <select id="typeFilter">
+                    <option value="">Semua Jenis Mobil</option>
+                    <option value="1">Box</option>
+                    <option value="2">Cabriolet</option>
+                    <option value="3">Convertible</option>
+                    <option value="4">Coupe</option>
+                    <option value="5">Double Cabin</option>
+                    <option value="6">Fastback</option>
+                    <option value="7">Hatchback</option>
+                    <option value="8">Jeep</option>
+                    <option value="9">Minibus</option>
+                    <option value="10">MPV</option>
+                    <option value="11">Pick-up</option>
+                    <option value="12">Sedan</option>
+                    <option value="13">SUV</option>
+                    <option value="14">Targa</option>
+                    <option value="15">Van</option>
+                    <option value="16">Wagon</option>   
+                </select>
+            </div>
+        
+            <canvas id="barChart"></canvas>
+        </div>
+        
+        <div class="section-chart" id="line">
+            <h2>Line Chart Harga Mobil Bekas</h2>
+            <label for="brandSelect">Pilih Brand Mobil:</label>
+            <select id="brandSelect">
+                <option value="1">Aston Martin</option>
+                <option value="2">Audi</option>
+                <option value="3">Bentley</option>
+                <option value="4">BMW</option>
+                <option value="5">Cadillac</option>
+                <option value="6">Chery</option>
+                <option value="7">Chevrolet</option>
+                <option value="8">Daihatsu</option>
+                <option value="9">DFSK</option>
+                <option value="10">Ford</option>
+                <option value="11">Geely</option>
+                <option value="12">Maserati</option>
+                <option value="13">Mercedes-Benz</option>
+                <option value="14">Mazda</option>
+                <option value="15">Rolls-Royce</option>
+                <option value="16">Renault</option>
+                <option value="17">Land Rover</option>
+                <option value="18">Lexus</option>
+                <option value="19">Hummer</option>
+                <option value="20">Hyundai</option>
+                <option value="21">KIA</option>
+                <option value="22">Honda</option>
+                <option value="23">Nissan</option>
+                <option value="24">Peugeot</option>
+                <option value="25">Porsche</option>
+                <option value="26">Proton</option>
+                <option value="27">Jeep</option>
+                <option value="28">MG</option>
+                <option value="29">Wuling</option>
+                <option value="30">Isuzu</option>
+                <option value="31">Tesla</option>
+                <option value="32">Toyota</option>
+                <option value="33">Subaru</option>
+                <option value="34">smart</option>
+                <option value="35">Volkswagen</option>
+                <option value="36">Suzuki</option>
+                <option value="37">Mitsubishi</option>
+                <option value="38">MINI</option> 
+            </select>
+            <canvas id="lineChart"></canvas>
+        </div>
+        <div class="section-chart" id="pie">
+            <h2>Pie Chart Jenis Mobil Bekas</h2>
+            <canvas id="pieChart"></canvas>
+        </div>
+
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>Primo</h3>
+                        <ul>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/#predict">Prediksi Harga</a></li>
+                            <li><a href="/car_list">List Data Mobil</a></li>
+                            <li><a href="/history">History Hasil Prediksi</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Contact Us</h3>
+                        <ul>
+                            <li>Mulyosari Utara</li>
+                            <li>Surabaya, Jawa Timur</li>
+                            <li>Phone: 081276665882</li>
+                            <li>Email: info@primo.com</li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Follow Me</h3>
+                        <div class="social-icons">
+                            <a href="https://www.instagram.com/zidanermdhn_/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://github.com/Daizenn" aria-label="Github"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 Primo (Prediksi Harga Mobil) | MZR</p>
+                </div>
+            </div>
+        </footer>
+        
+</body>
+</html>
